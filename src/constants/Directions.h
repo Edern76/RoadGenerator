@@ -9,4 +9,7 @@
 using types::Coord;
 using types::DirectionEnum;
 
-const Coord Directions[4] = {Coord::Direction(DirectionEnum::NORTH), Coord::Direction(DirectionEnum::SOUTH), Coord::Direction(DirectionEnum::EAST), Coord::Direction(DirectionEnum::WEST)};
+namespace Constants {
+    const Coord Directions[4] = {Coord::Direction(DirectionEnum::NORTH), Coord::Direction(DirectionEnum::SOUTH),
+                                 Coord::Direction(DirectionEnum::EAST), Coord::Direction(DirectionEnum::WEST)};
+}

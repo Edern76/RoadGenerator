@@ -9,4 +9,7 @@ add_executable(RoadGenerator main.cpp
         src/constants/Directions.h
         src/types/RoadGrid.cpp
         include/types/DirectionEnum.h
-        include/types/RoadGrid.h)
+        include/types/RoadGrid.h
+        include/types/RoadTile.h
+        src/constants/RoadElements.h
+        src/types/Coord.cpp)

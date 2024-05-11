@@ -10,14 +10,14 @@
 
 namespace types {
     struct RoadElement {
-        unsigned char character;
+        signed char character;
         std::vector<Coord> connections; // Because unoredered_set will not play nice
 
         RoadElement() : character(0), connections() {}
 
-        RoadElement(unsigned char character_val, std::vector<Coord> connections_val) : character(character_val),
-                                                                                       connections(
-                                                                                               std::move(
-                                                                                                       connections_val)) {}
+        RoadElement(signed char character_val, std::vector<Coord> connections_val) : character(character_val),
+                                                                                     connections(
+                                                                                             std::move(
+                                                                                                     connections_val)) {}
     };
 }

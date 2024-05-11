@@ -11,7 +11,7 @@ namespace types {
     struct Coord {
         const int x, y;
 
-        Coord() : x(0), y(0) {}
+        Coord() : x(-1), y(-1) {}
 
         Coord(int x_val, int y_val) : x(x_val), y(y_val) {}
 
@@ -29,5 +29,7 @@ namespace types {
                     throw std::invalid_argument("Invalid direction");
             }
         }
+
+        friend std::ostream &operator<<(std::ostream &os, const Coord &coord);
     };
 }
