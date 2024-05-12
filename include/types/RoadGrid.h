@@ -45,7 +45,7 @@ namespace types {
         std::vector<OptionalRoadTileRef>
         GetAllNeighbors(Coord position);
 
-        std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>> GetNeighborsMap(Coord position);
+        std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>> GetNeighborsMap(const Coord &position);
 
         ConnectivityCheckResult GetPossibleOutboundDirections(Coord position);
 

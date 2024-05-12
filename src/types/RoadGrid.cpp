@@ -61,7 +61,7 @@ namespace types {
 
     void RoadGrid::SetTile(Coord position, RoadElement const *element) {
         if (!this->IsInBounds(position)) {
-            throw std::invalid_argument("Position out of bounds");
+            throw exceptions::OutOfBoundsException("Position out of bounds");
         }
         this->tiles[position.y][position.x].element.emplace(element);
     }
@@ -73,7 +73,7 @@ namespace types {
             throw exceptions::OutOfBoundsException("Position out of bounds");
         }
         std::vector<OptionalRoadTileRef> result;
-        for (const Coord dir: Constants::Directions) {
+        for (const Coord &dir: Constants::Directions) {
             const Coord newPos = position + dir;
             if (this->IsInBounds(newPos)) {
                 result.push_back(std::ref(this->GetTile(newPos)));
@@ -82,7 +82,8 @@ namespace types {
         return result;
     }
 
-    std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>> RoadGrid::GetNeighborsMap(Coord position) {
+    std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>>
+    RoadGrid::GetNeighborsMap(const Coord &position) {
         std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>> result;
         for (const DirectionEnum dir: EnumRange<DirectionEnum>()) {
             Coord newPos = position + Coord::Direction(dir);
