@@ -5,16 +5,13 @@
 #pragma once
 
 #include <exception>
+#include <cpptrace/cpptrace.hpp>
 
 namespace exceptions {
-    struct InvalidNonEmptyAssumption : public std::exception {
-        const char *msg;
+    struct InvalidNonEmptyAssumption : public cpptrace::exception_with_message {
+        explicit InvalidNonEmptyAssumption(std::string &&message_arg,
+                                           cpptrace::raw_trace &&trace = cpptrace::detail::get_raw_trace_and_absorb()) noexcept
+                : cpptrace::exception_with_message(std::move(message_arg), std::move(trace)) {}
 
-        explicit InvalidNonEmptyAssumption(const char *msg) : msg(msg) {}
-
-        [[nodiscard]]
-        const char *what() const noexcept override {
-            return msg;
-        }
     };
 }

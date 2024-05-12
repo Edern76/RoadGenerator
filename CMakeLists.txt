@@ -19,4 +19,24 @@ add_executable(RoadGenerator main.cpp
         placeholderTests.cpp
         placeholderTests.h
         src/types/DirectionEnum.cpp
-        src/utils/SetUtils.h)
+        src/utils/SetUtils.h
+        src/exceptions/TileAlreadyFilledElement.h)
+
+include(FetchContent)
+FetchContent_Declare(
+        cpptrace
+        GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
+        GIT_TAG v0.5.4 # <HASH or TAG>
+)
+FetchContent_MakeAvailable(cpptrace)
+target_link_libraries(RoadGenerator cpptrace::cpptrace)
+
+
+if (WIN32)
+    add_custom_command(
+            TARGET RoadGenerator POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:cpptrace::cpptrace>
+            $<TARGET_FILE_DIR:RoadGenerator>
+    )
+endif ()

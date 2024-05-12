@@ -9,11 +9,17 @@
 
 namespace types {
     struct Coord {
-        const int x, y;
+        int x, y;
 
         Coord() : x(-1), y(-1) {}
 
         Coord(int x_val, int y_val) : x(x_val), y(y_val) {}
+
+        Coord(const Coord &other) : x(other.x), y(other.y) {}
+
+        Coord(Coord &other) : x(other.x), y(other.y) {}
+
+        Coord(const Coord &&other) : x(other.x), y(other.y) {}
 
         static Coord Direction(DirectionEnum dir) {
             switch (dir) {
@@ -32,6 +38,12 @@ namespace types {
 
         Coord operator+(const Coord &other) const {
             return Coord{x + other.x, y + other.y};
+        }
+
+        Coord &operator=(const Coord &other) {
+            x = other.x;
+            y = other.y;
+            return *this;
         }
 
         bool operator==(const Coord &other) const {

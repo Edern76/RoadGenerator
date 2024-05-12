@@ -19,7 +19,7 @@ namespace types {
     // Not using template to allow for large grids to fit in heap
     class RoadGrid {
     private:
-        std::optional<RoadTile> **tiles;
+        RoadTile **tiles;
 
         enum class ConnectionType {
             NONE,
@@ -40,7 +40,7 @@ namespace types {
 
         void SetTile(Coord position, RoadElement const *element);
 
-        std::optional<RoadTile> &GetTile(Coord position);
+        RoadTile &GetTile(Coord position);
 
         std::vector<OptionalRoadTileRef>
         GetAllNeighbors(Coord position);
@@ -48,8 +48,6 @@ namespace types {
         std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>> GetNeighborsMap(Coord position);
 
         ConnectivityCheckResult GetPossibleOutboundDirections(Coord position);
-
-        RoadTile &GetTileNotNull(Coord position);
 
         friend std::ostream &operator<<(std::ostream &os, const RoadGrid &grid);
 

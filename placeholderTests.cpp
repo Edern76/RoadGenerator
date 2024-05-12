@@ -25,9 +25,8 @@ RoadGrid makePlaceholderGrid() {
     RoadGrid grid = RoadGrid(10, 10);
     grid.SetTile(std::move(Coord{0, 0}), &Constants::Cross);
     grid.SetTile(std::move(Coord{0, 1}), &Constants::Cross);
-    std::optional<RoadTile> &optTile = grid.GetTile(std::move(Coord{0, 1}));
-    if (optTile.has_value()) {
-        RoadTile &tile = optTile.value();
+    RoadTile &tile = grid.GetTile(std::move(Coord{0, 1}));
+    if (tile.element.has_value()) { ;
         tile.element = &Constants::NE;
     }
     return grid;
@@ -38,16 +37,16 @@ void doVariousStuff() {
     std::cout << grid << std::endl;
     auto filledNeighbors = grid.GetAllNeighbors(std::move(Coord{0, 0})) |
                            std::ranges::views::filter(
-                                   [](OptionalRoadTileRef opt) { return opt.get().has_value(); });
+                                   [](OptionalRoadTileRef opt) { return opt.get().element.has_value(); });
 
     for (OptionalRoadTileRef t: filledNeighbors) {
-        std::cout << t.get().value().Position << std::endl;
+        std::cout << t.get().Position << std::endl;
     }
 
     auto neighbors = grid.GetAllNeighbors(std::move(Coord{2, 2})) |
-                     std::ranges::views::filter([](OptionalRoadTileRef opt) { return !opt.get().has_value(); });
+                     std::ranges::views::filter([](OptionalRoadTileRef opt) { return !opt.get().element.has_value(); });
     for (OptionalRoadTileRef o: neighbors) {
-        o.get().emplace(RoadTile{Coord{}, &Cross});
+        o.get().element.emplace(&Cross);
     }
 
     std::unordered_map<DirectionEnum, std::optional<OptionalRoadTileRef>> dirMap = grid.GetNeighborsMap(
@@ -56,8 +55,8 @@ void doVariousStuff() {
 
     for (std::pair<DirectionEnum, std::optional<OptionalRoadTileRef>> entry: nomEmptyEntries) {
         Coord newPos = Coord{9, 0} + Coord::Direction(entry.first);
-        entry.second.value().get().emplace(RoadTile{newPos, &NE});
-        std::cout << entry.second.value().get()->Position << std::endl;
+        entry.second.value().get().element.emplace(&NE);
+        std::cout << entry.second.value().get().Position << std::endl;
     }
 
     std::cout << grid << std::endl;
