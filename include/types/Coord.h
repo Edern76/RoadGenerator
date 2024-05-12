@@ -18,9 +18,9 @@ namespace types {
         static Coord Direction(DirectionEnum dir) {
             switch (dir) {
                 case DirectionEnum::NORTH:
-                    return {0, 1};
-                case DirectionEnum::SOUTH:
                     return {0, -1};
+                case DirectionEnum::SOUTH:
+                    return {0, 1};
                 case DirectionEnum::EAST:
                     return {1, 0};
                 case DirectionEnum::WEST:
@@ -28,6 +28,14 @@ namespace types {
                 default:
                     throw std::invalid_argument("Invalid direction");
             }
+        }
+
+        Coord operator+(const Coord &other) const {
+            return Coord{x + other.x, y + other.y};
+        }
+
+        bool operator==(const Coord &other) const {
+            return x == other.x && y == other.y;
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Coord &coord);

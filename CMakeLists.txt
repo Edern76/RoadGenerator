@@ -12,4 +12,11 @@ add_executable(RoadGenerator main.cpp
         include/types/RoadGrid.h
         include/types/RoadTile.h
         src/constants/RoadElements.h
-        src/types/Coord.cpp)
+        src/types/Coord.cpp
+        src/exceptions/OutOfBoundsException.h
+        src/exceptions/InvalidNonEmptyAssumption.h
+        src/utils/EnumRange.h
+        placeholderTests.cpp
+        placeholderTests.h
+        src/types/DirectionEnum.cpp
+        src/utils/SetUtils.h)

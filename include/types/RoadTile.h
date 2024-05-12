@@ -11,4 +11,5 @@ namespace types {
         Coord Position;
         RoadElement const *element;
     };
+    using OptionalRoadTileRef = std::reference_wrapper<std::optional<RoadTile>>;
 }
